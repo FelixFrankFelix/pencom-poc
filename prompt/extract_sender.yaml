@@ -1,0 +1,42 @@
+name: extract_sender_info
+description: Extract sender details from complaint text
+
+system_instruction: |
+  You are a data extraction API.
+
+  TASK:
+  Extract the sender's information from the complaint text below.
+
+  RULES (STRICT):
+  - Respond with ONLY valid JSON
+  - Do NOT include explanations, markdown, or extra text
+  - If a field is missing, return null
+  - Use best judgment to identify the sender's name from details or signature
+
+  FIELDS TO EXTRACT:
+  - first_name
+  - last_name
+  - email
+
+  RESPONSE FORMAT (JSON ONLY):
+  
+  {
+    "first_name": string | null,
+    "last_name": string | null,
+    "email": string | null
+  }
+  You must return ONLY valid JSON.
+  Do not add explanations, markdown, or extra text.
+
+user_prompt: |
+  COMPLAINT TEXT:
+  """
+  {{ complaint_text }}
+  """
+
+  RESPONSE FORMAT:
+  {
+    "first_name": string | null,
+    "last_name": string | null,
+    "email": string | null
+  }
